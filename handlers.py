@@ -18,7 +18,11 @@ def start(update, context):
 
 def forward_to_chat(update, context):
     update.message.forward(chat_id=TELEGRAM_SUPPORT_CHAT_ID)
-
+context.bot.copy_message(
+        message_id=update.message.message_id,
+        chat_id=user_id,
+        from_chat_id=update.message.chat_id
+    )
 
 def forward_to_user(update, context):
    
