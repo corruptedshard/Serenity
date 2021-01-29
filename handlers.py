@@ -10,27 +10,25 @@ def start(update, context):
 
     context.bot.send_message(
         chat_id=TELEGRAM_SUPPORT_CHAT_ID,
-        text=f"""
+        text=f"AKDKF""
 📞 Connected {user_info}.
         """,
     )
 
 
+def forward_to_chat(update, context):
+  
+    update.message.forward(chat_id=TELEGRAM_SUPPORT_CHAT_ID)
+
+
 def forward_to_user(update, context):
    
-     user_id = update.message.reply_to_message.forward_from.id
+    user_id = update.message.reply_to_message.forward_from.id
     context.bot.copy_message(
         message_id=update.message.message_id,
         chat_id=user_id,
         from_chat_id=update.message.chat_id
     )
-
-
-def forward_to_chat(update, context):
-
-    update.message.forward(chat_id=TELEGRAM_SUPPORT_CHAT_ID)
-   
-   
 
 
 def setup_dispatcher(dp):
