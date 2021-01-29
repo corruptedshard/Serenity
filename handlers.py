@@ -18,19 +18,23 @@ def start(update, context):
 
 def forward_to_user(update, context):
    
-
-def forward_to_user(update, context):
-   
-    user_id = update.message.reply_to_message.forward_from.id
+     user_id = update.message.reply_to_message.forward_from.id
     context.bot.copy_message(
         message_id=update.message.message_id,
-        user_id=user_id,
-        from_user_id=update.message.user_id
+        chat_id=user_id,
+        from_chat_id=update.message.chat_id
     )
+
+
+def forward_to_chat(update, context):
+
+    update.message.forward(chat_id=TELEGRAM_SUPPORT_CHAT_ID)
+   
+   
 
 
 def setup_dispatcher(dp):
     dp.add_handler(CommandHandler('start', start))
-    dp.add_handler(MessageHandler(Filters.chat_type.private, forward_to_user))
+    dp.add_handler(MessageHandler(Filters.chat_type.private, forward_to_chat))
     dp.add_handler(MessageHandler(Filters.chat(TELEGRAM_SUPPORT_CHAT_ID) & Filters.reply, forward_to_user))
     return dp
